@@ -71,8 +71,11 @@ class UserController extends BaseController{
         $re_password = $request->input('re-password');
         $name = $request->input('name');
 
-        g
+        $input_data = $request->input();
 
+        //TODO
+
+        User::createOrUpdate($input_data);
 
         return \Redirect::to('/login');
     }

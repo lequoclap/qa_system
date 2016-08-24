@@ -1,19 +1,12 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: LeTung
- * Date: 西暦16/07/04
- * Time: 21:25
- */
+
 
 namespace App\Http\Controllers;
 
 
-use App\Models\MercariItem;
-use Classes\MercariAPIClient;
 use Laracasts\Flash\Flash;
 
-class MercariItemController extends BaseController
+class VoteController extends BaseController
 {
 
     /**

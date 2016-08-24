@@ -8,14 +8,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MercariItem;
-use App\Models\User;
+
 use Illuminate\Http\Request;
-use League\Csv\Reader;
 use App\Models\Item;
 use Laracasts\Flash\Flash;
 
-class ItemsController extends BaseController
+class TopicController extends BaseController
 {
 
     public function addItemPage()

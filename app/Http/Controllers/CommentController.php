@@ -9,7 +9,7 @@
 namespace App\Http\Controllers;
 
 
-class NotificationController extends BaseController{
+class CommentController extends BaseController{
 
 
 }
