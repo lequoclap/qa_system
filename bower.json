@@ -1,0 +1,8 @@
+{
+  "name": "qa_system",
+  "version": "1.0.0",
+  "dependencies": {
+    "eonasdan-bootstrap-datetimepicker": null,
+    "riot": null
+  }
+}

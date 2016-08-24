@@ -1,0 +1,14 @@
+/vendor
+/node_modules
+/public/storage
+/public/bower_components
+Homestead.yaml
+Homestead.json
+.env
+
+_ide_helper.php
+_ide_helper_models.php
+Casanova.iml
+.idea
+docs/~$api_list.xlsx
+/public/images/product_image/
