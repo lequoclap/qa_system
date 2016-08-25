@@ -27,13 +27,13 @@
                         <h1>LOGIN</h1>
                         {{csrf_field()}}
                         <div>
-                            <input type="text" class="form-control" name="email" placeholder="Your mail address" required="" />
+                            <input type="text" class="form-control" name="email" placeholder="Your email address" required="" />
                         </div>
                         <div>
                             <input type="password" class="form-control" name="password" placeholder="Password" required="" />
                         </div>
                         <div>
-                            <button class="btn btn-default submit" type="submit">ログイン</button>
+                            <button class="btn btn-default submit" type="submit">Login</button>
                         </div>
                         <div>
                             <a href="/register">Create new account</a>

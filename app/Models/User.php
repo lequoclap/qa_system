@@ -32,7 +32,7 @@ class User extends Authenticatable
             $user = new User();
             $user->name         = $data['name'];
             $user->email        = $data['email'];
-            $user->password     = $data['password'];
+            $user->password     = bcrypt($data['password']);
             }
         $user->save();
         return $user;

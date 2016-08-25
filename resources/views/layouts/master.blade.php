@@ -43,7 +43,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="{{URL::route('add_item')}}"><i class="fa fa-upload"></i> 商品アップロード </a></li>
                             <li><a href="/item/list"><i class="fa fa-database"></i> 商材管理 </a></li>
                             <li><a><i class="fa fa-cog"></i> ユーザー設定 </a></li>
                             <li><a><i class="fa fa-tasks"></i> 出品状況 </a></li>
@@ -67,67 +66,14 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
-                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="{{Auth::user()->photo_url}}" alt="">{{Auth::user()->name}}
-                                <span class=" fa fa-angle-down"></span>
-                            </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <?php $relations = Auth::user()->userRelations; ?>
-                                @foreach($relations as $relation)
-                                    <?php $user = $relation->user; ?>
-                                <li>
-                                    <a href="/relation/{{$user->id}}">
-                                        <span class="user-profile"> {{$user->name}}<img class="pull-right" src="{{$user->photo_url}}" alt=""></span>
-                                    </a>
-                                </li>
-                                @endforeach
-                                <li><a href="/user/add">  アカウント追加</a>
-                                </li>
                                 <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </li>
                             </ul>
                         </li>
-                        <?php
-                            $lastCrawlNotification = Session::get('lastNotificationTime');
-                            $now = (new DateTime())->getTimestamp();
-                            if (!$lastCrawlNotification || $lastCrawlNotification < $now) {
-                                $client = \App\Http\Controllers\BaseController::getMercariInstant();
-                                $countNotificationData = $client->getNotificationCount(Auth::user()->min_notification_id);
-                                $notifications = $client->getNotifications();
-                                Session::put('notifications', $notifications);
-                                Session::put('notificationsCount', $countNotificationData);
-                                Session::put('lastNotificationTime', (new DateTime('+10 minutes'))->getTimestamp());
-                            } else {
-                                $notifications = Session::get('notifications');
-                                $countNotificationData = Session::get('notificationsCount');
-                            }
-                            ?>
+
                         <li role="presentation" class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-envelope-o"></i>
-                                @if (isset($countNotificationData['data']['count']) && $countNotificationData['data']['count'] > 0)
-                                    <span class="badge bg-green">{{$countNotificationData['data']['count']}}</span>
-                                @endif
-                            </a>
                             <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu" style="max-height: 500px; overflow: scroll;">
-                                @foreach($notifications['data'] as $notification)
-                                <li>
-                                    <a>
-                                        @if(isset($notification['photo_url']))
-                                        <span class="image">
-                                            <img src="{{$notification['photo_url']}}" alt="Profile Image" />
-                                        </span>
-                                        @endif
-                                        <span>
-                                            <span>【{{$notification['kind']}}】</span>
-                                            <span class="time">　{{(new DateTime())->setTimestamp($notification['created'])->format('Y/m/d H:i')}}</span>
-                                        </span>
-                                        <span class="message">
-                                            {{$notification['message']}}
-                                        </span>
-                                    </a>
-                                </li>
-                                @endforeach
                             </ul>
                         </li>
 

@@ -7,6 +7,7 @@
 @section('content')
     <div class="">
         <div class="row">
+            <h1>Im here!!</h1>
         </div>
     </div>
 @stop
