@@ -18,7 +18,7 @@
                 <!-- menu prile quick info -->
                 <div class="profile">
                     <div class="profile_pic">
-                        <img src="{{Auth::user()->photo_url}}" alt="..." class="img-circle profile_img">
+                        <img src="{{asset('/images/user.png')}}" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
@@ -35,12 +35,9 @@
                     <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
-                            <li><a><i class="fa fa-home"></i> ホーム <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="/">ダッシュボード</a>
-                                    </li>
-                                    <li><a href="/news/list">ニュース</a>
-                                    </li>
+                                    <li><a href="/">Dashboard</a>
                                 </ul>
                             </li>
                             <li><a href="/item/list"><i class="fa fa-database"></i> 商材管理 </a></li>

@@ -9,16 +9,21 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Category;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Models\Item;
+use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
 
 class TopicController extends BaseController
 {
 
-    public function addItemPage()
+    public function createPage()
     {
-        return \View::make('item.add_item_page');
+
+        $categories = Category::get();
+        return \View::make('topic.create_topic',['categories' => $categories]);
     }
 
     /**
@@ -26,33 +31,22 @@ class TopicController extends BaseController
      * @return \Illuminate\Http\RedirectResponse
      */
 
-    public function editItem(Request $request)
+    public function create(Request $request)
     {
-        $client = self::getMercariInstant();
-        $image_1 = $request->file('photo_1');
-        var_dump($image_1);
-        $item = new Item();
-        $item->item_id = $request->get('id');
-        $item->brand_id = $request->get('brand');
-        $item->category_id = $request->get('category');
-        $item->description = $request->get('description');
-        $item->item_condition = $request->get('condition');
-        $item->name = $request->get('name');
-        $item->price = $request->get('price');
-        $item->shipping_duration_id = $request->get('shipping_duration');
-        $item->ship_from_area_id = $request->get('shipping_from_area');
-        $item->shipping_method_id = $request->get('shipping_method');
-        $item->shipping_payer_id = $request->get('shipping_payer');
-        $item->image_1 = $item->item_id . "_1.jpg";
+        $user = Auth::user();
 
-        copy(
-            $image_1->getPathname(),
-            public_path('images/product_image/') . $item->item_id . "_1.jpg"
-        );
+        $topic = new Topic();
+        $topic->category_id = $request->input('category_id');
+        $topic->content = $request->input('content');
+        $topic->title = $request->input('title');
+        $topic->tags = $request->input('tags');
+        $topic->user_id = $user->id;
 
-        $updatedItem = $client->editItem($item);
 
-        return redirect()->route('item_list');
+        $topic->save();
+        //TODO check validate
+
+        return redirect()->route('index');
     }
 
     /**
