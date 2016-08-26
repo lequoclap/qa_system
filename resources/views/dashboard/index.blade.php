@@ -16,9 +16,9 @@
         <div class="list-group">
             @foreach($topics as $topic)
             <a href="/topic/view/{{$topic->id}}" class="list-group-item">
-                <span class="badge glyphicon glyphicon-thumbs-down bg-red ">14</span>
-                <span class="badge glyphicon glyphicon-thumbs-up bg-green">11</span>
-                <h4 class="list-group-item-heading text-primary">{{$topic->title}}</h4>
+                <span class="badge fa fa-thumbs-o-down bg-red ">14</span>
+                <span class="badge fa fa-thumbs-o-up bg-green">11</span>
+                <h4 class="text-primary">{{$topic->title}}</h4>
                 <p class="list-group-item-text">{{substr($topic->content,0,500)."..."}}</p>
                 <br>
                 <p class="list-group-item-text text-success">Owner: {{$topic->user_name}}</p>
