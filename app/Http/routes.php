@@ -23,5 +23,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/topic/new', 'TopicController@createPage')->name('create_topic_form');
     Route::get('/topic/view/{id}', 'TopicController@viewTopic')->name('view_topic');
+    Route::post('/topic/comment', 'TopicController@commentTopic')->name('comment_topic');
     Route::post('/topic', 'TopicController@create')->name('create_topic');
 });

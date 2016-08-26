@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentallela Alela! | </title>
+    <title> QA Manager System | @yield('title') </title>
 
     <!-- Bootstrap core CSS -->
 
@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/maps/jquery-jvectormap-2.0.3.css')}}" />
     <link href="{{asset('css/icheck/flat/green.css')}}" rel="stylesheet" />
     <link href="{{asset('css/floatexamples.css')}}" rel="stylesheet" type="text/css" />
+    @yield('style')
 
     <script src="{{asset('js/jquery.min.js')}}"></script>
     <script src="{{asset('js/nprogress.js')}}"></script>

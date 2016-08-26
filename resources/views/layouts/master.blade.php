@@ -11,7 +11,7 @@
             <div class="left_col scroll-view">
 
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>Auto Free Market!</span></a>
+                    <a href="/" class="site_title"><i class="fa fa-reddit"></i> <span>QA Manager</span></a>
                 </div>
                 <div class="clearfix"></div>
 
@@ -35,15 +35,9 @@
                     <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
-                            <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="/">Dashboard</a>
-                                </ul>
-                            </li>
-                            <li><a href="/item/list"><i class="fa fa-database"></i> 商材管理 </a></li>
-                            <li><a><i class="fa fa-cog"></i> ユーザー設定 </a></li>
-                            <li><a><i class="fa fa-tasks"></i> 出品状況 </a></li>
-                            <li><a href="/mitem/list"><i class="fa fa-gavel"></i> 出品中商品 </a></li>
+                            <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+                            <li><a href="/item/list"><i class="fa fa-database"></i> My topics</a></li>
+                            <li><a><i class="fa fa-cog"></i> something </a></li>
                         </ul>
                     </div>
 
@@ -54,30 +48,16 @@
 
         <!-- top navigation -->
         <div class="top_nav">
-
             <div class="nav_menu">
                 <nav class="" role="navigation">
                     <div class="nav toggle">
                         <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                     </div>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="">
-                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li role="presentation" class="dropdown">
-                            <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu" style="max-height: 500px; overflow: scroll;">
-                            </ul>
-                        </li>
-
+                    <ul class="nav navbar-nav navbar-right ">
+                        <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Logout</a></li>
                     </ul>
                 </nav>
             </div>
-
         </div>
         <!-- /top navigation -->
 

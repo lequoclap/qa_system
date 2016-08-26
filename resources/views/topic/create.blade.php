@@ -4,8 +4,9 @@
     Create new topic
 @stop
 
-@section('script')
-
+@section('style')
+    <link rel="stylesheet" href="{{asset('bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}">
+    <link rel="stylesheet" href="{{asset('bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css')}}">
 @stop
 
 @section('content')
@@ -42,7 +43,7 @@
                                 <!-- Select Basic -->
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="selectbasic">Category</label>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <select name="category_id" class="form-control">
                                             @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
@@ -62,14 +63,13 @@
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="textinput">Tags</label>
-                                    <div class="col-md-5">
-                                        <input id="textinput" name="tags" type="text" placeholder="" class="form-control input-md">
-
+                                    <div class="col-md-8 text-left">
+                                        <input id="textinput" name="tags" type="text" placeholder="Add tag"  data-role="tagsinput">
                                     </div>
                                 </div>
 
                             </fieldset>
-                            <button type="submit" class="btn btn-success">Create</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
                         </form>
                     </div>
                  </div>
@@ -80,6 +80,5 @@
 
 
 @section('script')
-    <script>
-    </script>
+    <script src="{{asset('bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
 @stop

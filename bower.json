@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "eonasdan-bootstrap-datetimepicker": null,
-    "riot": null
+    "riot": null,
+    "bootstrap-tagsinput":null
   }
 }

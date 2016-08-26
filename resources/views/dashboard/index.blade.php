@@ -7,31 +7,31 @@
 @section('content')
     <div class="">
         <div class="row">
-            <h1>Im here!!</h1>
+            <h1>Check your timeline!!</h1>
         </div>
     </div>
 
-    <a class="btn btn-primary col-sm-2 glyphicon-plus" href="{{URL::route('create_topic_form')}}">Create new topic</a>
-
-        <div class="container">
-            <h2>List Group With Custom Content</h2>
-            <div class="list-group">
-                <a href="#" class="list-group-item active">
-                    <h4 class="list-group-item-heading">First List Group Item Heading</h4>
-                    <p class="list-group-item-text">List Group Item Text</p>
-                </a>
-                <a href="#" class="list-group-item">
-                    <h4 class="list-group-item-heading">Second List Group Item Heading</h4>
-                    <p class="list-group-item-text">List Group Item Text</p>
-                </a>
-                <a href="#" class="list-group-item">
-                    <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
-                    <p class="list-group-item-text">List Group Item Text</p>
-                </a>
-            </div>
+    <div class="container">
+        <p><a class="btn btn-primary glyphicon-plus" href="{{URL::route('create_topic_form')}}">Create new topic</a></p>
+        <div class="list-group">
+            @foreach($topics as $topic)
+            <a href="/topic/view/{{$topic->id}}" class="list-group-item">
+                <span class="badge glyphicon glyphicon-thumbs-down bg-red ">14</span>
+                <span class="badge glyphicon glyphicon-thumbs-up bg-green">11</span>
+                <h4 class="list-group-item-heading text-primary">{{$topic->title}}</h4>
+                <p class="list-group-item-text">{{substr($topic->content,0,500)."..."}}</p>
+                <br>
+                <p class="list-group-item-text text-success">Owner: {{$topic->user_name}}</p>
+                <p class="list-group-item-text text-success">Category: {{$topic->category_name}}</p>
+                <p class="list-group-item-text text-left">Tags:
+                    @foreach(explode( ',',$topic->tags) as $tag)
+                    <span class="badge">{{$tag}}</span>
+                    @endforeach
+                </p>
+            </a>
+            @endforeach
         </div>
+    </div>
 @stop
-
-
 @section('script')
 @stop
