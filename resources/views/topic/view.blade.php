@@ -37,6 +37,7 @@
             <p>
                 {{$topic->content}}
             </p>
+            <hr>
             <p class="col-md-6 text-left">Tags:
                 @foreach(explode( ',',$topic->tags) as $tag)
                     <span class="badge">{{$tag}}</span>
