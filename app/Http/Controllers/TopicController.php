@@ -12,11 +12,12 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Topic;
+use App\Models\Vote;
+use Classes\Services\VoteService;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Laracasts\Flash\Flash;
 
 class TopicController extends BaseController
 {
@@ -54,6 +55,8 @@ class TopicController extends BaseController
 
     public function viewTopic($id)
     {
+        $voteService = new VoteService();
+
         $topic = Topic::join('users', 'users.id', '=', 'user_id')
             ->join('categories', 'categories.id', '=', 'category_id')
             ->where('topics.id', $id)
@@ -61,8 +64,10 @@ class TopicController extends BaseController
             ->first();
         //Like
         $data['topic'] = $topic;
-        $data['up_vote'] = 0;
-        $data['down_vote'] = 0;
+        $data['up_vote'] = $voteService->countTopicVote($id, Vote::TYPE_VOTE_UP);
+        $data['down_vote'] = $voteService->countTopicVote($id, Vote::TYPE_VOTE_DOWN);
+        $data['is_up_voted'] = $voteService->isVoted(Vote::TARGET_TOPIC, Vote::TYPE_VOTE_UP, $id);
+        $data['is_down_voted'] = $voteService->isVoted(Vote::TARGET_TOPIC, Vote::TYPE_VOTE_DOWN, $id);
 
         // sort comment by upvote
 
@@ -70,7 +75,23 @@ class TopicController extends BaseController
             ->where('topic_id', $id)
             ->select('comments.*', 'users.name as user_name')
             ->get();
-        $data['comments'] = $comments;
+
+        $comments_data = Array();
+
+        foreach ($comments as $comment){
+            $comment_data = Array();
+            $comment_data['comment'] = $comment;
+
+            $comment_data['is_up_voted'] = $voteService->isVoted(Vote::TARGET_COMMENT, Vote::TYPE_VOTE_UP, $comment->id);
+            $comment_data['is_down_voted'] = $voteService->isVoted(Vote::TARGET_COMMENT, Vote::TYPE_VOTE_DOWN, $comment->id);
+            $comment_data['up_vote'] = $voteService->countCommentVote($comment->id, Vote::TYPE_VOTE_UP);
+            $comment_data['down_vote'] = $voteService->countCommentVote($comment->id, Vote::TYPE_VOTE_DOWN);
+
+            $comments_data[] = $comment_data;
+        }
+
+        $data['comments_data'] = $comments_data;
+
         return \View::make('topic.view',['data' => $data]);
     }
 
@@ -95,19 +116,5 @@ class TopicController extends BaseController
     }
 
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function addItems(Request $request)
-    {
-        $this->validate($request, [
-            'csv_file' => 'file|required',
-            'data_type' => 'required'
-        ]);
-
-
-        return redirect()->route('item_list');
-    }
 
 }

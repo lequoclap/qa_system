@@ -4,81 +4,64 @@
 namespace App\Http\Controllers;
 
 
-use Laracasts\Flash\Flash;
+use App\Http\Requests\Request;
+use App\Models\Vote;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 
 class VoteController extends BaseController
 {
 
-    /**
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function listPage()
+    public function createVote()
     {
-        $mitems = MercariItem::join('items', 'mercari_items.item_id', '=', 'items.id')
-            ->where(['items.user_id' => \Auth::user()->id])
-            ->selectRaw('mercari_items.*,items.name,items.description')
-            ->get();
+        $user = Auth::user();
 
-        return \View::make('mitem.list', ['items' => $mitems]);
-    }
+        $target = Input::get('target');
+        $id = Input::get('id');
+        $vote_type = Input::get('vote_type');
 
-    /**
-     * @param $m_id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function stop($m_id)
-    {
-        $mItem = MercariItem:: where('m_item_id', $m_id)->first();
-        $client = self::getMercariInstant();
-        $result = $client->updateStatus($mItem, MercariItem::STATUS_STOP);
-        if (array_key_exists('error', $result)) {
-            Flash::error($result['error'][0]['message']);
-        } else {
-            $mItem->status = 'stop';
-            $mItem->save();
+        if ($target == Vote::TARGET_TOPIC){
+            $col_id = 'topic_id';
+        }else if($target == Vote::TARGET_COMMENT){
+            $col_id = 'comment_id';
         }
-        return redirect()->route('m_item_list');
+        $vote = Vote::where('user_id', $user->id)
+            ->where('target', $target)
+            ->where($col_id, $id)
+            ->first();
+
+        if(!$vote){
+            $vote = new Vote();
+            $vote->target = $target;
+            $vote->$col_id = $id;
+            $vote->user_id = $user->id;
+        }
+
+        $vote->type = $vote_type;
+        $vote->save();
+
     }
 
-    /**
-     * @param $m_id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function delete($m_id)
-    {
-        $mItem = MercariItem:: where('m_item_id', $m_id)->first();
-        $client = self::getMercariInstant();
-        $result = $client->updateStatus($mItem, MercariItem::STATUS_CANCEL);
-        if (array_key_exists('error', $result)) {
-            Flash::error($result['error'][0]['message']);
-        } else {
-            $mItem->delete();
+    public function deleteVote(){
+        $user = Auth::user();
+
+        $target = Input::get('target');
+        $id = Input::get('id');
+
+        if ($target == Vote::TARGET_TOPIC){
+            $col_id = 'topic_id';
+        }else if($target == Vote::TARGET_COMMENT){
+            $col_id = 'comment_id';
         }
-        return redirect()->route('m_item_list');
+
+        $vote = Vote::where('user_id', $user->id)
+            ->where('target', $target)
+            ->where($col_id, $id)
+            ->first();
+        $vote->delete();
+
+
     }
 
-    /**
-     * @param $m_id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function reSell($m_id)
-    {
-        $mItem = MercariItem:: where('m_item_id', $m_id)->first();
-        $client = self::getMercariInstant();
-        $result = $client->updateStatus($mItem, MercariItem::STATUS_SELLING);
-        if (array_key_exists('error', $result)) {
-            Flash::error($result['error'][0]['message']);
-        } else {
-            $mItem->status = 'on_sale';
-            $mItem->save();
-        }
-        return redirect()->route('m_item_list');
-    }
-
-    public function getItemDetail($m_id){
-        if (!\Auth::check()) {
-            return redirect()->route('m_item_list');
-        }
-        $user = \Auth::user();
-    }
 }
