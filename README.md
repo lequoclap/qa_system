@@ -14,6 +14,3 @@
 - `php artisan migrate`
 - `composer dump-autoload`
 
-## License
-
-The Question & Answer System is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
