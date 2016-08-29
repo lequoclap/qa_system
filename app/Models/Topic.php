@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Topic extends Model
 {
+    const STATUS_SOLVED = 'solved';
+    const STATUS_OPEN = 'open';
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');
