@@ -26,7 +26,12 @@ class TopicController extends BaseController
     {
 
         $categories = Category::get();
-        return \View::make('topic.create',['categories' => $categories]);
+        $statuses = Topic::getAllStatus();
+
+        return \View::make('topic.create',[
+            'categories' => $categories,
+            'statuses' => $statuses]
+            );
     }
 
     /**
@@ -40,13 +45,13 @@ class TopicController extends BaseController
 
         $topic = new Topic();
         $topic->category_id = $request->input('category_id');
+        $topic->status = $request->input('status');
         $topic->content = $request->input('content');
         $topic->title = $request->input('title');
         $topic->tags = $request->input('tags');
         $topic->user_id = $user->id;
-
-
         $topic->save();
+
         //TODO check validate
 
         return redirect()->route('index');

@@ -36,7 +36,7 @@
                         <h3>General</h3>
                         <ul class="nav side-menu">
                             <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-                            <li><a href="/item/list"><i class="fa fa-database"></i> My topics</a></li>
+                            <li><a href="/me/topic/1"><i class="fa fa-database"></i> My topics</a></li>
                             <li><a><i class="fa fa-cog"></i> something </a></li>
                         </ul>
                     </div>

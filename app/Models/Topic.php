@@ -29,4 +29,21 @@ class Topic extends Model
     {
         return $this->hasMany('App\Models\Vote');
     }
+
+    public static function getAllStatus(){
+        $arr = [
+            self::STATUS_OPEN => self::getStatusLabel(self::STATUS_OPEN),
+            self::STATUS_SOLVED => self::getStatusLabel(self::STATUS_SOLVED)
+        ];
+        return $arr;
+
+    }
+    public static function getStatusLabel($code){
+        switch ($code){
+            case self::STATUS_SOLVED:
+                return 'SOLVED';
+            case self::STATUS_OPEN:
+                return 'OPEN';
+        }
+    }
 }

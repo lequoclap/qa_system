@@ -52,6 +52,18 @@
                                     </div>
                                 </div>
 
+                                <!-- Select Basic -->
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="selectbasic">Status</label>
+                                    <div class="col-md-2">
+                                        <select name="status" class="form-control">
+                                            @foreach($statuses as $key => $value)
+                                                <option value="{{$key}}">{{$value}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <!-- Textarea -->
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="textarea">Content</label>

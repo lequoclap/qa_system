@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="input-group col-md-6">
-                    <input type="text" class="form-control" placeholder="Text se    arch" name="search-term">
+                    <input type="text" class="form-control" placeholder="Text search" name="search-term">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit">
                             <i class="glyphicon glyphicon-search"></i>
@@ -67,7 +67,9 @@
                     <span class="badge fa fa-thumbs-o-down bg-red ">{{$topic_data['down_vote']}}</span>
                     <span class="badge fa fa-thumbs-o-up bg-green">{{   $topic_data['up_vote']}}</span>
 
-                    <h4 class="text-primary">{{$topic->title}}<b class="text-danger">[SOLVED]</b></h4>
+                    <h4 class="text-primary">{{$topic->title}}
+                        <b class="text-danger">[{{\App\Models\Topic::getStatusLabel($topic->status) }}]</b>
+                    </h4>
                     <p class="list-group-item-text">
                         @if(strlen($topic->content) < 500)
                             {{$topic->content}}

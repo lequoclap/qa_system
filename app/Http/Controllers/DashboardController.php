@@ -21,6 +21,7 @@ class DashboardController extends BaseController{
 
     public function index()
     {
+
         $topic_dao = Topic::join('users', 'users.id', '=', 'user_id')
             ->join('categories', 'categories.id', '=', 'category_id')
             ->select('topics.*', 'users.name as user_name', 'categories.name as category_name');

@@ -16,13 +16,13 @@
                 <div class="page-header">
                     <h3>
                         {{$topic->user_name}}
-                        <small class="badge bg-white"><a href="/#" class="text-danger">{{$data['topic']->category_name}}</a></small>
+                        <small class="badge bg-white"><a href="/?category={{$data['topic']->category_name}}" class="text-danger">{{$data['topic']->category_name}}</a></small>
                     </h3>
                 </div>
             </div>
         </div>
     </div>
-
+    <a class="btn btn-primary fa fa-edit" href="{{URL::route('edit_topic', ['id' => $topic->id])}}"> Edit topic</a>
     <div class="container">
 
         {{--Topic content--}}
