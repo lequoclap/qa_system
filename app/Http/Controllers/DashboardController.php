@@ -22,6 +22,10 @@ class DashboardController extends BaseController{
     public function index()
     {
 
+        $sort_by = Input::get('sort-by')? Input::get('sort-by') : self::SORT_BY_UP_VOTE;
+        $order_type = Input::get('order-type')? Input::get('order-type') : self::ORDER_TYPE_DESC;
+
+
         $topic_dao = Topic::join('users', 'users.id', '=', 'user_id')
             ->join('categories', 'categories.id', '=', 'category_id')
             ->select('topics.*', 'users.name as user_name', 'categories.name as category_name');
@@ -53,26 +57,22 @@ class DashboardController extends BaseController{
             $topics_data[] = $topic_data;
         }
 
-        if(Input::get('sort-by')){
-            switch (Input::get('sort-by')){
-                case self::SORT_BY_TIME:
-                    $topics_data = $this->_sortByTime($topics_data);
-                    break;
-                case self::SORT_BY_UP_VOTE:
-                    $topics_data = $this->_sortByUpVote($topics_data);
-                    break;
-                case self::SORT_BY_DOWN_VOTE:
-                    $topics_data = $this->_sortByDownVote($topics_data);
-                    break;
-            }
+        switch ($sort_by){
+            case self::SORT_BY_TIME:
+                $topics_data = $this->_sortByTime($topics_data);
+                break;
+            case self::SORT_BY_UP_VOTE:
+                $topics_data = $this->_sortByUpVote($topics_data);
+                break;
+            case self::SORT_BY_DOWN_VOTE:
+                $topics_data = $this->_sortByDownVote($topics_data);
+                break;
         }
-        if(Input::get('order-type')){
-            $order_type = Input::get('order-type');
-            if($order_type == self::ORDER_TYPE_DESC){
-                $topics_data = array_reverse($topics_data);
-            }
-            $setting['order_type'] = $order_type;
+
+        if($order_type == self::ORDER_TYPE_DESC){
+            $topics_data = array_reverse($topics_data);
         }
+        $setting['order_type'] = $order_type;
 
         return \View::make('dashboard.index', ['topics_data'=>$topics_data, 'setting' => $setting]);
     }

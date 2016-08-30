@@ -15,7 +15,7 @@
     <div class="container">
         <p><a class="btn btn-primary glyphicon-plus" href="{{URL::route('create_topic_form')}}">Create new topic</a></p>
     {{--Search Area--}}
-        <form class="navbar-form">
+        <form class="navbar-form" id="input-form">
                 <div class="col-md-5 text-right">
                     <input id="textinput" name="tags" type="text" placeholder="Add tag"  data-role="tagsinput">
                 </div>
@@ -62,14 +62,16 @@
 
             @foreach($topics_data as $topic_data)
                 <?php $topic = $topic_data['topic']; ?>
-                <a href="/topic/view/{{$topic->id}}" class="list-group-item">
+                <div class="list-group-item">
                     <span class="badge fa fa-comment bg-orange">{{$topic_data['comment_count']}}</span>
                     <span class="badge fa fa-thumbs-o-down bg-red ">{{$topic_data['down_vote']}}</span>
                     <span class="badge fa fa-thumbs-o-up bg-green">{{   $topic_data['up_vote']}}</span>
 
-                    <h4 class="text-primary">{{$topic->title}}
-                        <b class="text-danger">[{{\App\Models\Topic::getStatusLabel($topic->status) }}]</b>
-                    </h4>
+                    <a href="/topic/view/{{$topic->id}}" >
+                        <h4 class="text-primary">{{$topic->title}}
+                            <b class="text-danger">[{{\App\Models\Topic::getStatusLabel($topic->status) }}]</b>
+                        </h4>
+                    </a>
                     <p class="list-group-item-text">
                         @if(strlen($topic->content) < 500)
                             {{$topic->content}}
@@ -82,10 +84,10 @@
                     <p class="list-group-item-text">Category: <small class="text-danger">{{$topic->category_name}}</small></p>
                     <p class="list-group-item-text text-left">Tags:
                         @foreach(explode( ',',$topic->tags) as $tag)
-                        <span class="badge">{{$tag}}</span>
+                        <span class="badge"><a href="/?tags={{$tag}}" style="color: white">{{$tag}}</a></span>
                         @endforeach
                     </p>
-                </a>
+                </div>
             @endforeach
         </div>
     </div>
@@ -93,13 +95,13 @@
 @section('script')
     <script src="{{asset('bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
     <script>
-        $('#sort-by').change(function() {
+        $('#sort-by1').change(function() {
             var value = $(this).val();
             var newUrl = addParam("sort-by", value);
             window.location = newUrl;
         });
 
-        $('#order-type').click(function() {
+        $('#order-type1').click(function() {
             var value = $(this).val();
             var newUrl = addParam("order-type", value);
             window.location = newUrl;

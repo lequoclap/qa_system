@@ -37,7 +37,12 @@
                         <ul class="nav side-menu">
                             <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
                             <li><a href="/me/topic/1"><i class="fa fa-database"></i> My topics</a></li>
-                            <li><a><i class="fa fa-cog"></i> something </a></li>
+                            <li><a><i class="fa fa-list"></i> Categories <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="/?category=">Bussiness</a></li>
+                                    <li><a href="/?category=">Technology</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
 

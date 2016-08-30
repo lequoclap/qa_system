@@ -40,7 +40,7 @@
             <hr>
             <p class="col-md-6 text-left">Tags:
                 @foreach(explode( ',',$topic->tags) as $tag)
-                    <span class="badge">{{$tag}}</span>
+                    <span class="badge"><a href="/?tags={{$tag}}" style="color: white">{{$tag}}</a></span>
                 @endforeach
             </p>
             <div class="col-md-6 text-right">
