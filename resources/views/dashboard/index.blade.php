@@ -95,13 +95,13 @@
 @section('script')
     <script src="{{asset('bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
     <script>
-        $('#sort-by1').change(function() {
+        $('#sort-by').change(function() {
             var value = $(this).val();
             var newUrl = addParam("sort-by", value);
             window.location = newUrl;
         });
 
-        $('#order-type1').click(function() {
+        $('#order-type').click(function() {
             var value = $(this).val();
             var newUrl = addParam("order-type", value);
             window.location = newUrl;
