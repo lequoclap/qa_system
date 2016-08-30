@@ -68,7 +68,7 @@
                                 <div class="form-group">
                                     <label class="col-md-2 control-label" for="textarea">Content</label>
                                     <div class="col-md-8">
-                                        <textarea class="form-control" id="textarea" name="content" rows="8"></textarea>
+                                        <textarea class="form-control" id="content-editor" name="content" rows="8"></textarea>
                                     </div>
                                 </div>
 
@@ -93,4 +93,9 @@
 
 @section('script')
     <script src="{{asset('bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
+    <script src="{{asset('bower_components/ckeditor/ckeditor.js')}}"></script>
+    <script>
+        CKEDITOR.replace( 'content-editor' );
+    </script>
+
 @stop

@@ -19,8 +19,7 @@
                 <div class="col-md-5 text-right">
                     <input id="textinput" name="tags" type="text" placeholder="Add tag"  data-role="tagsinput">
                 </div>
-
-                <div class="input-group col-md-6">
+                <div class="input-group col-md-4">
                     <input type="text" class="form-control" placeholder="Text search" name="search-term">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit">
@@ -31,14 +30,6 @@
             </form>
     {{--Sort Area--}}
         <div class="text-right">
-            <?php $current_url = Request::getPathInfo() . (Request::getQueryString() ? ('?' . Request::getQueryString()) : '');
-                if(strpos($current_url,'?')){
-                    $current_url .= '&';
-                }else{
-                    $current_url .= '?';
-                }
-            ?>
-
             <label>Sort by:</label>
             <select id="sort-by" class="btn btn-dark" name="sort-by">
                 <option value="/">--</option>
@@ -74,9 +65,9 @@
                     </a>
                     <p class="list-group-item-text">
                         @if(strlen($topic->content) < 500)
-                            {{$topic->content}}
+                            {{strip_tags($topic->content)}}
                         @else
-                            {{substr($topic->content,0,500)."..."}}
+                            {{strip_tags(substr($topic->content,0,500)."...")}}
                         @endif
                     </p>
                     <br>

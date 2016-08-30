@@ -35,7 +35,7 @@
                 {{$topic->created_at}}
             </i>
             <p>
-                {{$topic->content}}
+               {!! $topic->content !!}
             </p>
             <hr>
             <p class="col-md-6 text-left">Tags:
@@ -80,7 +80,7 @@
                     <i class="text-muted">
                         {{$comment->created_at}}
                     </i>
-                    <p>{{$comment->content}}</p>
+                    <p>{!!$comment->content!!}</p>
 
                     <div class="text-right">
                         @if($comment_data['is_up_voted'] == true)
@@ -119,7 +119,7 @@
             {{csrf_field()}}
             <div class="form-group">
                 <div class="col-md-10">
-                    <textarea class="form-control" id="m_comment" name="m_comment" required =""></textarea>
+                    <textarea class="form-control" id="comment-editor" name="m_comment" required =""></textarea>
                 </div>
                 <input type="hidden" name="topic_id" value="{{$topic->id}}"/>
                 <div class="col-md-10 text-right">
@@ -134,6 +134,11 @@
 
 
 @section('script')
+
+    <script src="{{asset('bower_components/ckeditor/ckeditor.js')}}"></script>
+    <script>
+        CKEDITOR.replace( 'comment-editor' );
+    </script>
     <script>
         const TYPE_VOTE_UP = 1;
         const TYPE_VOTE_DOWN = 2;

@@ -4,6 +4,7 @@
   "dependencies": {
     "eonasdan-bootstrap-datetimepicker": null,
     "riot": null,
-    "bootstrap-tagsinput":null
+    "bootstrap-tagsinput":null,
+    "ckeditor/ckeditor": null
   }
 }
