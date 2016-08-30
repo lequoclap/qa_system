@@ -22,7 +22,7 @@ class DashboardController extends BaseController{
     public function index()
     {
 
-        $sort_by = Input::get('sort-by')? Input::get('sort-by') : self::SORT_BY_UP_VOTE;
+        $sort_by = Input::get('sort-by')? Input::get('sort-by') : self::SORT_BY_TIME;
         $order_type = Input::get('order-type')? Input::get('order-type') : self::ORDER_TYPE_DESC;
 
 

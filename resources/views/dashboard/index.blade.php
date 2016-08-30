@@ -63,6 +63,7 @@
                             <b class="text-danger">[{{\App\Models\Topic::getStatusLabel($topic->status) }}]</b>
                         </h4>
                     </a>
+                    <i class="list-group-item-text text-muted">{{$topic->created_at}}</i>
                     <p class="list-group-item-text">
                         @if(strlen($topic->content) < 500)
                             {{strip_tags($topic->content)}}
