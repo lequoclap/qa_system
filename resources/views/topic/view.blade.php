@@ -76,7 +76,8 @@
             @foreach($data['comments_data'] as $comment_data)
                 <?php $comment = $comment_data['comment'] ?>
                 <div class="list-group-item">
-                    <h4 class="text-success">{{$comment->user_name}}</h4>
+                    <h4 class="text-success col-md-10">{{$comment->user_name}}</h4>
+                    <h1 class="text-right col-md-2"><span class="fa fa-trophy" style="color: orange"></span></h1>
                     <i class="text-muted">
                         {{$comment->created_at}}
                     </i>
