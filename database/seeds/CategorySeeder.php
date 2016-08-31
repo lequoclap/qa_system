@@ -11,47 +11,36 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('item_categories')->insert([
-            'name' => str_random(10),
-            'parent_category_id' => 1,
-            'root_category_id' => 1,
-            'brand_group_id' => 1,
+        DB::table('categories')->insert([
+            'name' => "Technology"
         ]);
-        DB::table('item_categories')->insert([
-            'name' => str_random(10),
-            'parent_category_id' => 1,
-            'root_category_id' => 1,
-            'brand_group_id' => 1,
-            'id' => 5
+        DB::table('categories')->insert([
+            'name' => "Science"
         ]);
 
-        DB::table('item_categories')->insert([
-            'name' => str_random(10),
-            'parent_category_id' => 2,
-            'root_category_id' => 2,
-            'brand_group_id' => 2,
-            'id' => 226
+        DB::table('categories')->insert([
+            'name' => "Business"
         ]);
-        DB::table('item_categories')->insert([
-            'name' => str_random(10),
-            'parent_category_id' => 2,
-            'root_category_id' => 2,
-            'brand_group_id' => 2,
-            'id' => 236
+
+        DB::table('categories')->insert([
+            'name' => "Life"
         ]);
-        DB::table('item_categories')->insert([
-            'name' => str_random(10),
-            'parent_category_id' => 2,
-            'root_category_id' => 2,
-            'brand_group_id' => 2,
-            'id' => 986
+
+        DB::table('categories')->insert([
+            'name' => "Management"
         ]);
-        DB::table('item_categories')->insert([
-            'name' => str_random(10),
-            'parent_category_id' => 2,
-            'root_category_id' => 2,
-            'brand_group_id' => 2,
-            'id' => 864
+
+        DB::table('categories')->insert([
+            'name' => "Communication"
         ]);
+
+        DB::table('categories')->insert([
+            'name' => "Manner"
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => "Other"
+        ]);
+
     }
 }
