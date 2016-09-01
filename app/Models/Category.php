@@ -18,5 +18,8 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Topic');
     }
-
+    public static function getAllCategories(){
+        $categories = self::get();
+        return $categories;
+    }
 }

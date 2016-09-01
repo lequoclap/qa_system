@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+<?php  use Illuminate\Support\Facades\Auth; ?>
 @section('title')
     Create new topic
 @stop
@@ -22,7 +22,9 @@
             </div>
         </div>
     </div>
-    <a class="btn btn-primary fa fa-edit" href="{{URL::route('edit_topic', ['id' => $topic->id])}}"> Edit topic</a>
+    @if(Auth::user()->id == $topic->user_id)
+        <a class="btn btn-primary fa fa-edit" href="{{URL::route('edit_topic', ['id' => $topic->id])}}"> Edit topic</a>
+    @endif
     <div class="container">
 
         {{--Topic content--}}

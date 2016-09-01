@@ -102,6 +102,15 @@ class TopicController extends BaseController
 
     public function editTopicPage($id)
     {
+        $user = Auth::user();
+        $topic = Topic::where('user_id', $user->id)
+            ->where('id', $id)
+            ->first();
+        if($topic){
+            return Redirect::to('/topic/edit/'.$id, ['topic', $topic]);
+        }else{
+            return Redirect::to('/topic/view/'.$id);
+        }
 
     }
 
