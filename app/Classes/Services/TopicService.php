@@ -138,4 +138,14 @@ class TopicService
         return $count;
     }
 
+    public function getSortByList(){
+        $arr = [
+            self::SORT_BY_TIME => "Created time",
+            self::SORT_BY_UP_VOTE => "Up vote",
+            self::SORT_BY_DOWN_VOTE => "Down vote",
+        ];
+        return $arr;
+
+    }
+
 }

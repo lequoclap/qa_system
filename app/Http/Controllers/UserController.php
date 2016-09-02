@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Classes\Constants;
+use Classes\Services\TopicService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -91,6 +93,25 @@ class UserController extends BaseController{
             User::createOrUpdate($input_data);
             return \Redirect::to('/login');
         }
+    }
+
+    public function listTopics(){
+        $extra = Array();
+        $extra['sort_by'] = Input::get('sort-by');
+        $extra['order_type'] = Input::get('order-type');
+        $extra['search_term'] = Input::get('search-term');
+        $extra['tags'] =Input::get('tags');
+        $extra['user'] = Auth::user()->id;
+
+        $topicService = new TopicService();
+        $topics_data  = $topicService->getTopicList($extra);
+
+        $setting = Array();
+        $setting['order_type'] = $extra['order_type'];
+        $setting['sort_by'] = $extra['sort_by'];
+        $setting['sort_by_list'] = $topicService->getSortByList();
+
+        return \View::make('dashboard.index', ['topics_data'=>$topics_data, 'setting' => $setting]);
     }
 
 }

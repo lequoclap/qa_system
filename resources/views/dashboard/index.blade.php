@@ -32,10 +32,13 @@
         <div class="text-right">
             <label>Sort by:</label>
             <select id="sort-by" class="btn btn-dark" name="sort-by">
-                <option value="/">--</option>
-                <option value="created_time">Created time</option>
-                <option value="up_vote">Up vote</option>
-                <option value="down_vote">DownVote</option>
+                @foreach($setting['sort_by_list'] as $key => $value )
+                    @if($key == $setting['sort_by'])
+                        <option value="{{$key}}" selected >{{$value}}</option>
+                    @else
+                        <option value="{{$key}}">{{$value}}</option>
+                    @endif
+                @endforeach
             </select>
 
             @if( isset($setting['order_type']) && $setting['order_type'] == 'desc')
@@ -48,7 +51,7 @@
         <hr>
         <div class="list-group">
             @if(!$topics_data)
-                <h2 class="text-muted">There are no results that match your search</h2>
+                <h2 class="text-muted">There are no results that match your search!</h2>
             @endif
 
             @foreach($topics_data as $topic_data)
@@ -73,7 +76,7 @@
                     </p>
                     <br>
                     <p class="list-group-item-text">Owner:  <small class="text-danger">{{$topic->user_name}}</small></p>
-                    <p class="list-group-item-text">Category: <small class="text-danger">{{$topic->category_name}}</small></p>
+                    <p class="list-group-item-text">Category:<a href="/category/{{$topic->category_id}}">  <small class="text-danger">{{$topic->category_name}}</small></a></p>
                     <p class="list-group-item-text text-left">Tags:
                         @foreach(explode( ',',$topic->tags) as $tag)
                         <span class="badge"><a href="/?tags={{$tag}}" style="color: white">{{$tag}}</a></span>

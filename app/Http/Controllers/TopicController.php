@@ -67,6 +67,10 @@ class TopicController extends BaseController
             ->where('topics.id', $id)
             ->select('topics.*', 'users.name as user_name', 'categories.name as category_name')
             ->first();
+        if(!$topic){
+            return Redirect::to('/');
+        }
+
         //Like
         $data['topic'] = $topic;
         $data['up_vote'] = $voteService->countTopicVote($id, Vote::TYPE_VOTE_UP);
@@ -95,7 +99,7 @@ class TopicController extends BaseController
             $comments_data[] = $comment_data;
         }
 
-        $data['comments_data'] = $comments_data;
+        $data['comments_data'] = $this->_sortCommentList($comments_data);
 
         return \View::make('topic.view',['data' => $data]);
     }
@@ -107,10 +111,35 @@ class TopicController extends BaseController
             ->where('id', $id)
             ->first();
         if($topic){
-            return Redirect::to('/topic/edit/'.$id, ['topic', $topic]);
+            $categories = Category::get();
+            $statuses = Topic::getAllStatus();
+
+            return \View::make('topic.edit', [
+                'topic'=> $topic,
+                'categories' => $categories,
+                'statuses' => $statuses]);
         }else{
             return Redirect::to('/topic/view/'.$id);
         }
+
+    }
+
+    public function editTopic(Request $request)
+    {
+        $id = $request->input('id');
+
+        $user = Auth::user();
+        $topic = Topic::where('user_id', $user->id)
+            ->where('id', $id)
+            ->first();
+        $topic->status = $request->input('status');
+        $topic->category_id = $request->input('category_id');
+        $topic->content = $request->input('content');
+        $topic->title = $request->input('title');
+        $topic->tags = $request->input('tags');
+        $topic->save();
+
+        return Redirect::to('/topic/view/'.$id);
 
     }
 
@@ -130,5 +159,12 @@ class TopicController extends BaseController
     }
 
 
+    private function _sortCommentList($array){
+        $array = array_values(array_sort($array, function ($value) {
+            return $value['up_vote'];
+        }));
+        $array = array_reverse($array);
+        return $array;
+    }
 
 }

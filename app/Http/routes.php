@@ -25,11 +25,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/topic/new', 'TopicController@createPage')->name('create_topic_form');
     Route::get('/topic/view/{id}', 'TopicController@viewTopic')->name('view_topic');
-    Route::get('/topic/edit/{id}', 'TopicController@editPage')->name('edit_topic_form');
-    Route::get('/topic/edit', 'TopicController@edit')->name('edit_topic');
+    Route::get('/topic/edit/{id}', 'TopicController@editTopicPage')->name('edit_topic_form');
+    Route::post('/topic/edit', 'TopicController@editTopic')->name('edit_topic');
 
     Route::post('/topic/comment', 'TopicController@commentTopic')->name('comment_topic');
     Route::post('/topic/create', 'TopicController@create')->name('create_topic');
+
+    Route::get('/category/{id}', 'CategoryController@listTopics');
+    Route::get('/me/topic', 'UserController@listTopics')->name('my_topic_list');
 
 
     Route::post('/vote/create', 'VoteController@createVote');

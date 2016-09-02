@@ -23,7 +23,7 @@
         </div>
     </div>
     @if(Auth::user()->id == $topic->user_id)
-        <a class="btn btn-primary fa fa-edit" href="{{URL::route('edit_topic', ['id' => $topic->id])}}"> Edit topic</a>
+        <a class="btn btn-primary fa fa-edit" href="{{URL::route('edit_topic_form', ['id' => $topic->id])}}"> Edit topic</a>
     @endif
     <div class="container">
 
@@ -75,11 +75,19 @@
         {{--Comment List--}}
 
         <div class="list-group col-md-10">
-            @foreach($data['comments_data'] as $comment_data)
+            @foreach($data['comments_data'] as $key => $comment_data)
                 <?php $comment = $comment_data['comment'] ?>
                 <div class="list-group-item">
-                    <h4 class="text-success col-md-10">{{$comment->user_name}}</h4>
-                    <h1 class="text-right col-md-2"><span class="fa fa-trophy" style="color: orange"></span></h1>
+
+                    <h4 class="text-success">{{$comment->user_name}}
+                    @if($key == 0)
+                        <span class="fa fa-star" style="color: gold"></span><span class="fa fa-star" style="color: gold"></span><span class="fa fa-star" style="color: gold"></span>
+                    @elseif($key ==1)
+                            <span class="fa fa-star" style="color: gold"></span><span class="fa fa-star" style="color: gold"></span>
+                    @elseif($key ==2)
+                            <span class="fa fa-star" style="color: gold"></span>
+                    @endif
+                    </h4>
                     <i class="text-muted">
                         {{$comment->created_at}}
                     </i>

@@ -40,11 +40,10 @@
                             <li><a><i class="fa fa-list"></i> Categories <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     @foreach(\App\Models\Category::getAllCategories() as $category)
-                                    <li><a href="/?category={{$category->id}}">{{$category->name}}</a></li>
+                                    <li><a href="/category/{{$category->id}}">{{$category->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
-                            <li><a href="/me/setting"><i class="fa fa-cog"></i>Setting</a></li>
                         </ul>
                     </div>
 
