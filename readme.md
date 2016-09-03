@@ -1,5 +1,12 @@
 # Question & Answer System
 
+##Demo
+[Link Demo](http://latasy.com)
+
+##TODO list
+- [ ] Add pagging
+- [ ] Add validation messagers when register
+
 ## Installation
 
 1. Clone this project or Download that ZIP file
@@ -12,5 +19,6 @@
 - `bower install`
 - `gulp`
 - `php artisan migrate`
+- `php artisan db:seed`
 - `composer dump-autoload`
 
