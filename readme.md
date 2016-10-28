@@ -6,6 +6,7 @@
 ##TODO list
 - [ ] Add pagging
 - [ ] Add validation messagers when register
+- [ ] Add Markdown Editor
 
 ## Installation
 
